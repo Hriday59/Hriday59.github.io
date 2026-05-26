@@ -12,7 +12,7 @@
 
   <style>
     /* ═══════════════════════════════════════
-       DESIGN TOKENS - HIGH-TECH INTERFACE EXECUTIONS
+       DESIGN TOKENS - MODERN HIGH-TECH INTERFACE
     ═══════════════════════════════════════ */
     :root {
       --bg:          #060814;
@@ -256,8 +256,14 @@
     .t-dot.g { background: #10B981; }
 
     .terminal-body { padding: 1.5rem; font-family: var(--mono); font-size: 13px; line-height: 1.8; }
+    .t-comment { color: #475569; }
     .t-key { color: var(--accent-teal); }
     .t-str { color: var(--green); }
+    .t-num { color: #F59E0B; }
+    .t-prompt { color: var(--green); margin-right: 6px; }
+    .t-cmd { color: var(--text-main); }
+    .t-out { color: var(--text-body); padding-left: 16px; }
+    .t-ok { color: var(--green); }
 
     .hero-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2rem; max-width: 540px; }
     .badge { font-family: var(--mono); font-size: 10px; padding: 4px 10px; background: var(--bg-panel); border: 1px solid var(--border-dim); border-radius: 4px; color: var(--text-body); }
@@ -280,41 +286,53 @@
     /* Squircle Frame Transformation */
     .about-photo-wrap { position: relative; border-radius: 24px; overflow: hidden; border: 2px solid var(--border-line); box-shadow: 0 0 30px var(--accent-glow); }
     .about-photo-wrap img { width: 100%; display: block; object-fit: cover; }
+    .about-photo-label { font-family: var(--mono); font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 0.5rem; }
     .about-content p { color: var(--text-body); margin-bottom: 1.5rem; font-size: 16px; }
+    .about-content p strong { color: var(--text-main); }
+
+    .data-table { width: 100%; border-collapse: collapse; margin: 2rem 0; }
+    .data-table td { padding: 10px 0; font-family: var(--mono); font-size: 13px; border-bottom: 1px solid var(--border-dim); vertical-align: top; }
+    .data-table td:first-child { color: var(--accent-teal); font-weight: 700; width: 140px; }
+    .data-table td:last-child { color: var(--text-main); }
 
     /* ═══════════════════════════════════════
        SKILLS MATRIX
     ═══════════════════════════════════════ */
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
     .skill-cell { background: var(--bg-panel); padding: 2rem; border-radius: 8px; border: 1px solid var(--border-dim); transition: border-color 0.2s; }
     .skill-cell:hover { border-color: var(--border-line); }
+    .skill-icon { font-family: var(--mono); font-size: 18px; color: var(--accent-teal); margin-bottom: 0.5rem; }
     .skill-name { font-weight: 600; color: var(--text-main); margin-bottom: 1rem; }
     .skill-bar-wrap { height: 4px; background: var(--bg-surface); border-radius: 2px; margin-bottom: 1rem; }
     .skill-bar { height: 100%; background: var(--accent-teal); border-radius: 2px; }
     .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .skill-tag { font-family: var(--mono); font-size: 10px; background: var(--bg-surface); padding: 2px 8px; border-radius: 4px; }
+    .skill-tag { font-family: var(--mono); font-size: 10px; background: var(--bg-surface); color: var(--text-body); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border-dim); }
 
     /* ═══════════════════════════════════════
        EXPERIENCE MODULE
     ═══════════════════════════════════════ */
     #experience { background: var(--bg-panel); }
     .exp-grid { display: grid; grid-template-columns: 250px 1fr; gap: 4rem; }
-    .exp-tab { display: block; width: 100%; text-align: left; background: none; border: none; border-left: 2px solid var(--border-dim); padding: 12px 20px; color: var(--text-body); font-family: var(--mono); font-size: 13px; cursor: pointer; }
-    .exp-tab.active { color: var(--accent-teal); border-left-color: var(--accent-teal); background: var(--accent-glow); }
+    .exp-nav { position: sticky; top: 100px; align-self: start; display: flex; flex-direction: column; gap: 0.5rem; }
+    .exp-tab { display: block; width: 100%; text-align: left; background: none; border: none; border-left: 2px solid var(--border-dim); padding: 12px 20px; color: var(--text-body); font-family: var(--mono); font-size: 13px; cursor: pointer; transition: all 0.2s; }
+    .exp-tab.active, .exp-tab:hover { color: var(--accent-teal); border-left-color: var(--accent-teal); background: var(--accent-glow); }
+    .exp-panels { position: relative; }
     .exp-panel { display: none; }
     .exp-panel.active { display: block; }
-    .exp-role { font-size: 1.8rem; font-weight: 700; color: var(--text-main); }
-    .exp-company { color: var(--accent-teal); font-family: var(--mono); margin-bottom: 1rem; }
-    .exp-list { list-style: none; margin-top: 1.5rem; }
-    .exp-list li { margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative; }
+    .exp-role { font-size: 1.8rem; font-weight: 700; color: var(--text-main); letter-spacing: -0.01em; }
+    .exp-company { color: var(--accent-teal); font-family: var(--mono); font-weight: 700; margin-bottom: 0.5rem; }
+    .exp-period { font-family: var(--mono); font-size: 12px; color: var(--text-muted); margin-bottom: 1.5rem; }
+    .exp-desc { color: var(--text-body); margin-bottom: 1.5rem; font-size: 15px; }
+    .exp-list { list-style: none; }
+    .exp-list li { margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative; color: var(--text-body); font-size: 14.5px; }
     .exp-list li::before { content: "→"; position: absolute; left: 0; color: var(--accent-teal); }
 
     /* ═══════════════════════════════════════
        INTERACTIVE PROJECTS INTERFACE
     ═══════════════════════════════════════ */
-    .projects-filter { display: flex; gap: 1rem; margin-bottom: 3rem; }
-    .filter-btn { background: var(--bg-panel); border: 1px solid var(--border-dim); color: var(--text-body); padding: 8px 16px; border-radius: 4px; font-family: var(--mono); font-size: 12px; cursor: pointer; }
-    .filter-btn.active { background: var(--accent-teal); color: var(--bg); border-color: var(--accent-teal); }
+    .projects-filter { display: flex; gap: 0.5rem; margin-bottom: 3rem; }
+    .filter-btn { background: var(--bg-panel); border: 1px solid var(--border-dim); color: var(--text-body); padding: 8px 18px; border-radius: 4px; font-family: var(--mono); font-size: 12px; cursor: pointer; transition: all 0.2s; }
+    .filter-btn.active, .filter-btn:hover { background: var(--accent-teal); color: var(--bg); border-color: var(--accent-teal); }
     
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2rem; }
     
@@ -327,36 +345,75 @@
     .project-type { font-family: var(--mono); font-size: 11px; color: var(--accent-teal); }
     
     /* Architecture Action Blocks */
-    .repo-link-action { font-family: var(--mono); font-size: 11px; color: var(--text-main); background: var(--bg-surface); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border-dim); transition: background 0.2s; }
-    .repo-link-action:hover { background: var(--accent-teal); color: var(--bg); }
+    .repo-link-action { font-family: var(--mono); font-size: 11px; color: var(--text-main); background: var(--bg-surface); padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border-dim); transition: all 0.2s; }
+    .repo-link-action:hover { background: var(--accent-teal); color: var(--bg); border-color: var(--accent-teal); }
     
-    .project-name { font-size: 1.5rem; font-weight: 700; color: var(--text-main); margin-bottom: 1rem; }
-    .project-desc { font-size: 14px; color: var(--text-body); margin-bottom: 1.5rem; flex-grow: 1; }
+    .project-name { font-size: 1.5rem; font-weight: 700; color: var(--text-main); margin-bottom: 1rem; line-height: 1.2; }
+    .project-desc { font-size: 14px; color: var(--text-body); margin-bottom: 1.5rem; flex-grow: 1; line-height: 1.6; }
+    .project-stack { display: flex; flex-wrap: wrap; gap: 6px; }
+    .stack-tag { font-family: var(--mono); font-size: 10px; background: var(--bg-surface); border: 1px solid var(--border-dim); padding: 2px 8px; border-radius: 4px; }
+
+    /* ═══════════════════════════════════════
+       EDUCATION MATRIX & TIMELINE
+    ═══════════════════════════════════════ */
+    #education { background: var(--bg-panel); }
+    .edu-timeline { position: relative; padding-left: 2rem; }
+    .edu-timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--accent-teal), transparent); }
+    .edu-item { position: relative; padding-bottom: 3rem; }
+    .edu-item::before { content: ''; position: absolute; left: -2rem; top: 6px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent-teal); box-shadow: 0 0 12px var(--accent-teal); transform: translateX(-4px); }
+    .edu-period { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--accent-teal); margin-bottom: 0.4rem; letter-spacing: 0.1em; }
+    .edu-degree { font-size: 1.6rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.2rem; }
+    .edu-inst { font-family: var(--mono); font-size: 13px; color: var(--text-body); }
+
+    /* ═══════════════════════════════════════
+       SERVICES LAYER
+    ═══════════════════════════════════════ */
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
+    .service-card { background: var(--bg-panel); padding: 2.5rem 2rem; border-radius: 8px; border: 1px solid var(--border-dim); border-bottom: 3px solid transparent; transition: all 0.2s; }
+    .service-card:hover { background: var(--bg-surface); border-bottom-color: var(--accent-teal); }
+    .service-num { font-family: var(--mono); font-size: 12px; color: var(--text-muted); margin-bottom: 1rem; }
+    .service-name { font-size: 1.4rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.8rem; }
+    .service-desc { font-size: 14px; color: var(--text-body); }
 
     /* ═══════════════════════════════════════
        CONTACT LAYER
     ═══════════════════════════════════════ */
     #contact { background: var(--bg-panel); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-    .contact-form input, .contact-form textarea { width: 100%; background: var(--bg-surface); border: 1px solid var(--border-dim); border-radius: 4px; padding: 1rem; color: var(--text-main); font-family: var(--mono); margin-bottom: 1rem; outline: none; }
-    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent-teal); }
-    .form-submit { background: var(--accent-teal); color: var(--bg); border: none; padding: 1rem 2rem; font-family: var(--mono); font-weight: 600; border-radius: 4px; cursor: pointer; width: 100%; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+    .contact-info h3 { font-size: 2.5rem; font-weight: 700; color: var(--text-main); margin-bottom: 1.5rem; }
+    .contact-info p { font-size: 15px; color: var(--text-body); margin-bottom: 2rem; }
+    .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-item { display: flex; align-items: flex-start; gap: 1rem; }
+    .contact-item-label { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--accent-teal); min-width: 90px; }
+    .contact-item-val { font-family: var(--mono); font-size: 14px; color: var(--text-main); }
+    .social-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 2rem; }
+    .social-btn { font-family: var(--mono); font-size: 11px; color: var(--text-body); text-decoration: none; border: 1px solid var(--border-dim); padding: 8px 16px; border-radius: 4px; transition: all 0.2s; }
+    .social-btn:hover { color: var(--accent-teal); border-color: var(--accent-teal); background: var(--accent-glow); }
 
-    footer { padding: 3rem 4rem; background: var(--bg); border-top: 1px solid var(--border-dim); display: flex; justify-content: space-between; font-family: var(--mono); font-size: 12px; }
+    .contact-form { display: flex; flex-direction: column; }
+    .contact-form input, .contact-form textarea { width: 100%; background: var(--bg-surface); border: 1px solid var(--border-dim); border-radius: 4px; padding: 1rem; color: var(--text-main); font-family: var(--mono); margin-bottom: 1rem; outline: none; transition: border-color 0.2s; }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent-teal); }
+    .form-submit { background: var(--accent-teal); color: var(--bg); border: none; padding: 1rem 2rem; font-family: var(--mono); font-weight: 600; border-radius: 4px; cursor: pointer; width: 100%; transition: background 0.2s; }
+    .form-submit:hover { background: var(--text-main); }
+
+    footer { padding: 3rem 4rem; background: var(--bg); border-top: 1px solid var(--border-dim); display: flex; justify-content: space-between; font-family: var(--mono); font-size: 12px; align-items: center; }
+    .footer-build span { color: var(--green); }
 
     /* RESPONSIVE PIPELINES */
     @media (max-width: 960px) {
       #hero { grid-template-columns: 1fr; }
       .hero-right { display: none; }
       .hero-left { padding: 4rem 2rem; }
-      .about-grid, .exp-grid, .contact-grid { grid-template-columns: 1fr; }
+      .about-grid, .exp-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .exp-nav { position: static; flex-direction: row; flex-wrap: wrap; }
       nav { padding: 0 2rem; }
+      .nav-links { display: none; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ═══════════ NAV INTERFACE ═══════════ -->
   <nav>
     <a href="#hero" class="nav-logo">hs<span>://</span>portfolio</a>
     <div class="nav-right-container">
@@ -367,12 +424,10 @@
         <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <!-- Production Level Document Action Linked -->
       <a href="assets/Hriday_Sarkar_CV.pdf" download="Hriday_Sarkar_CV.pdf" class="nav-cv-btn">Download CV</a>
     </div>
   </nav>
 
-  <!-- ═══════════ HERO INTERFACE ═══════════ -->
   <section id="hero">
     <div class="hero-left">
       <div class="hero-eyebrow">SYSTEM ACTIVE // HARDWARE ARCHITECT</div>
@@ -381,14 +436,14 @@
         <span id="typed"></span><span class="cursor"></span>
       </div>
       <p class="hero-desc">
-        Building intelligent embedded platforms at the raw intersection of firmware processing models, hardware networks, and low-latency cloud interaction architecture.
+        Building intelligent embedded platforms at the raw intersection of firmware processing models, hardware networks, and AI-driven automation.
       </p>
       <div class="hero-cta">
         <a href="#projects" class="btn-primary">View Matrix</a>
         <a href="assets/Hriday_Sarkar_CV.pdf" download="Hriday_Sarkar_CV.pdf" class="btn-outline">Get Resume Spec</a>
       </div>
       <div class="hero-badges">
-        <span class="badge">ESP32 Core</span><span class="badge">FreeRTOS Logic</span><span class="badge">MQTT Bus</span><span class="badge">C++ Architecture</span>
+        <span class="badge">ESP32 Core</span><span class="badge">FreeRTOS Logic</span><span class="badge">MQTT Bus</span><span class="badge">C++ Architecture</span><span class="badge">NRF24L01</span>
       </div>
     </div>
 
@@ -396,15 +451,17 @@
       <div class="terminal">
         <div class="terminal-bar"><div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div></div>
         <div class="terminal-body">
+          <div><span class="t-comment">// Hriday Sarkar — System Profile</span></div>
           <div><span class="t-key">"identity"</span>: <span class="t-str">"Hriday Sarkar"</span>,</div>
           <div><span class="t-key">"engineering_discipline"</span>: <span class="t-str">"Embedded Firmware / IoT"</span>,</div>
-          <div><span class="t-key">"node"</span>: <span class="t-str">"Dhaka, Bangladesh"</span></div>
+          <div><span class="t-key">"experience_years"</span>: <span class="t-num">3</span>,</div>
+          <div><span class="t-prompt">$</span><span class="t-cmd"> ping echithi.com</span></div>
+          <div class="t-out"><span class="t-ok">✓</span> Business Dev Lead — active</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ ABOUT INTERFACE ═══════════ -->
   <section id="about">
     <div class="container">
       <div class="section-header">
@@ -414,20 +471,31 @@
       <div class="about-grid">
         <div class="about-photo-wrap">
           <img src="assets/img/DP.jpg" alt="Hriday Sarkar Platform Frame">
+          <p class="about-photo-label">// hriday_sarkar.jpg</p>
         </div>
         <div class="about-content">
           <p>
-            I am an Embedded Systems Engineer and IoT Systems Researcher. My core engineering practices reside within the bare-metal and firmware abstractions: programming microcontrollers, refining register execution routines, and structuring multi-layer telemetry communication networks.
+            I'm an <strong>IoT Engineer and Robotics Researcher</strong> based in Dhaka, Bangladesh — with a BSc in Computer Science & Engineering from the University of Asia Pacific[cite: 4, 25]. My work lives at the raw edge where hardware meets software: programming microcontrollers, designing wireless communication systems, and building autonomous robots that interact with the real world[cite: 4, 5, 6].
           </p>
           <p>
-            Currently running active engineering strategies as Business Development Team Lead at eChithi, anchoring the Phoenix Project alongside public curriculum development tracks for robotics processing paradigms.
+            Currently, I lead the Business Development team at <strong>echithi.com</strong>, a robotics-centric e-commerce company, where I also drive the Phoenix Project — a national initiative connecting embedded systems, IoT, AI, and robotics[cite: 10, 13, 14]. I run the <strong>Born To Code (BTC)</strong> program, teaching embedded systems and robotics to school students[cite: 16].
           </p>
+          <p>
+            My research targets <strong>IEEE, MDPI, and Springer publication</strong>, focusing on multi-domain autonomous robotics (the RM22 robot) and AI-integrated IoT systems[cite: 64, 65].
+          </p>
+
+          <table class="data-table">
+            <tr><td>LOCATION</td><td>Dhaka, Bangladesh [cite: 11]</td></tr>
+            <tr><td>DEGREE</td><td>BSc in Computer Science & Engineering [cite: 25]</td></tr>
+            <tr><td>EMAIL</td><td>hridaysarkar83@gmail.com</td></tr>
+            <tr><td>PHONE</td><td>+880 1626929884</td></tr>
+            <tr><td>RESEARCH</td><td>IEEE / MDPI / Springer (in progress) [cite: 65]</td></tr>
+          </table>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ SKILLS MODULE ═══════════ -->
   <section id="skills">
     <div class="container">
       <div class="section-header">
@@ -436,20 +504,33 @@
       </div>
       <div class="skills-grid">
         <div class="skill-cell">
-          <div class="skill-name">Embedded Systems Firmware</div>
-          <div class="skill-bar-wrap"><div class="skill-bar" style="width:92%"></div></div>
-          <div class="skill-tags"><span class="skill-tag">ESP32 Core</span><span class="skill-tag">Bare-Metal C++</span><span class="skill-tag">FreeRTOS Tasks</span></div>
+          <div class="skill-icon">[μC]</div>
+          <div class="skill-name">Embedded Systems</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div>
+          <div class="skill-tags"><span class="skill-tag">ESP32</span><span class="skill-tag">Arduino</span><span class="skill-tag">EEPROM</span><span class="skill-tag">OTA</span><span class="skill-tag">NeoPixel</span></div>
         </div>
         <div class="skill-cell">
-          <div class="skill-name">Communication Interfaces</div>
-          <div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div>
-          <div class="skill-tags"><span class="skill-tag">MQTT Bus</span><span class="skill-tag">SPI / I2C Logic</span><span class="skill-tag">NRF24L01 RF</span></div>
+          <div class="skill-icon">[C++]</div>
+          <div class="skill-name">C / C++ Programming</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div>
+          <div class="skill-tags"><span class="skill-tag">Firmware</span><span class="skill-tag">RTOS</span><span class="skill-tag">Memory Mgmt</span></div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-icon">[RF]</div>
+          <div class="skill-name">Wireless Comms</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div>
+          <div class="skill-tags"><span class="skill-tag">NRF24L01</span><span class="skill-tag">Wi-Fi</span><span class="skill-tag">250KBPS</span></div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-icon">[🤖]</div>
+          <div class="skill-name">Robotics Engineering</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" style="width:82%"></div></div>
+          <div class="skill-tags"><span class="skill-tag">Gesture Ctrl</span><span class="skill-tag">Gas Detect</span><span class="skill-tag">Surveillance</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ EXPERIENCE INTERFACE ═══════════ -->
   <section id="experience">
     <div class="container">
       <div class="section-header">
@@ -458,14 +539,27 @@
       </div>
       <div class="exp-grid">
         <div class="exp-nav">
-          <button class="exp-tab active" onclick="showExp('e1', this)">eChithi // Lead Engineer</button>
+          <button class="exp-tab active" onclick="showExp('e1', this)">echithi — Lead</button>
+          <button class="exp-tab" onclick="showExp('e2', this)">echithi — Exec</button>
         </div>
         <div class="exp-panels">
           <div class="exp-panel active" id="e1">
             <div class="exp-role">Business Development Team Lead</div>
-            <div class="exp-company">eChithi Technology Ecosystem</div>
+            <div class="exp-company">echithi.com — Robotics-Centric E-Commerce [cite: 13]</div>
+            <div class="exp-period">2023 – Present [cite: 11, 12]</div>
+            <p class="exp-desc">Leading corporate growth strategies, partner relationships, and the national Phoenix initiative across institutional sectors[cite: 13, 14].</p>
             <ul class="exp-list">
-              <li>Directing project workflows for cross-functional engineering and operational units executing national robotics pipeline rollouts.</li>
+              <li>Directing the <strong>Phoenix Project</strong> for embedded systems and AI infrastructure[cite: 14].</li>
+              <li>Running the <strong>Born To Code (BTCs)</strong> curriculum models for programming student arrays[cite: 16].</li>
+            </ul>
+          </div>
+          <div class="exp-panel" id="e2">
+            <div class="exp-role">System Analysis and Data Entry Executive</div>
+            <div class="exp-company">echithi.com [cite: 17]</div>
+            <div class="exp-period">2022 – 2023 [cite: 19, 20]</div>
+            <ul class="exp-list">
+              <li>Performed hardware tracking and system analysis on technical devices[cite: 21].</li>
+              <li>Maintained functional product documentation for cloud deployment specs[cite: 22].</li>
             </ul>
           </div>
         </div>
@@ -473,7 +567,6 @@
     </div>
   </section>
 
-  <!-- ═══════════ INTERACTIVE PRODUCTION REGISTRY ═══════════ -->
   <section id="projects">
     <div class="container">
       <div class="section-header">
@@ -485,38 +578,116 @@
         <button class="filter-btn active" data-filter="all">All Cores</button>
         <button class="filter-btn" data-filter="iot">IoT Nodes</button>
         <button class="filter-btn" data-filter="robotics">Robotics</button>
+        <button class="filter-btn" data-filter="research">Research</button>
       </div>
 
       <div class="projects-grid" id="projectsGrid">
 
-        <!-- PROJECT CORE FRAME: RM22 INTERACTIVE ASSET LINK -->
         <a href="projects/rm22.html" class="project-link-wrapper" data-cat="robotics">
           <div class="project-card">
             <div class="project-meta-header">
-              <div class="project-type">Robotics Core // Sensor Fusion</div>
-              <!-- Code Repository Action Access Node -->
+              <div class="project-type">Robotics Core // Sensor Fusion [cite: 55]</div>
               <span class="repo-link-action" onclick="event.preventDefault(); window.open('https://github.com/hriday59/RM22-Core', '_blank');">Code Base</span>
             </div>
             <div class="project-name">RM22 MULTI-DOMAIN INDUSTRIAL ROBOT</div>
-            <div class="project-desc">Autonomous chemical hazard tracking and structural navigation platform utilizing real-time sensor fusion loops. Click to view architecture diagrams, hardware initialization drivers, and operational video feeds.</div>
-            <div class="project-stack">
-              <span class="stack-tag">C++ Firmware</span><span class="stack-tag">NRF24L01 Network</span><span class="stack-tag">Telemetry Processing</span>
-            </div>
+            <div class="project-desc">Autonomous hazard tracking and fire suppression system targeting publication in major engineering journals[cite: 55, 65]. Click to view subpage assets.</div>
+            <div class="project-stack"><span class="stack-tag">C++</span><span class="stack-tag">NRF24L01</span><span class="stack-tag">Gas Sensor</span></div>
           </div>
         </a>
 
-        <!-- PROJECT CORE FRAME: EEPROM WI-FI MANAGER -->
         <a href="projects/wifi-manager.html" class="project-link-wrapper" data-cat="iot">
           <div class="project-card">
             <div class="project-meta-header">
-              <div class="project-type">EEPROM Persistence // Core Subsystem</div>
+              <div class="project-type">EEPROM Persistence // Core Subsystem [cite: 52]</div>
               <span class="repo-link-action" onclick="event.preventDefault(); window.open('https://github.com/hriday59/ESP32-WiFi-EEPROM', '_blank');">Code Base</span>
             </div>
-            <div class="project-name">ESP32 EEPROM WI-FI CREDENTIAL CONTROLLER</div>
-            <div class="project-desc">Persistent cryptographic network allocation framework for production IoT nodes featuring automated fallback access-point configurations. Click to review execution traces.</div>
-            <div class="project-stack">
-              <span class="stack-tag">ESP32 Logic</span><span class="stack-tag">Non-Volatile Storage</span><span class="stack-tag">Web Control UI</span>
+            <div class="project-name">EEPROM WI-FI CREDENTIAL CONTROLLER</div>
+            <div class="project-desc">Persistent network configuration mapping for remote industrial tracking deployments[cite: 53]. Click to inspect state-machines.</div>
+            <div class="project-stack"><span class="stack-tag">ESP32</span><span class="stack-tag">EEPROM</span><span class="stack-tag">Web UI</span></div>
+          </div>
+        </a>
+
+        <a href="projects/warehouse-navigator.html" class="project-link-wrapper" data-cat="robotics">
+          <div class="project-card">
+            <div class="project-meta-header">
+              <div class="project-type">Pathfinding Algorithm // Logistics [cite: 48]</div>
+              <span class="repo-link-action" onclick="event.preventDefault(); window.open('https://github.com/hriday59/Warehouse-AStar', '_blank');">Code Base</span>
             </div>
+            <div class="project-name">A* WAREHOUSE PATHFINDING NAVIGATOR</div>
+            <div class="project-desc">Autonomous warehouse grid exploration mapping with integrated kinematics tracking for collision avoidance profiles[cite: 48].</div>
+            <div class="project-stack"><span class="stack-tag">A* Algorithm</span><span class="stack-tag">C++ Architecture</span><span class="stack-tag">Grid Control</span></div>
+          </div>
+        </a>
+
+        <a href="projects/hydroponic-fodder.html" class="project-link-wrapper" data-cat="iot">
+          <div class="project-card">
+            <div class="project-meta-header">
+              <div class="project-type">AgriTech // Smart Automation [cite: 59]</div>
+              <span class="repo-link-action" onclick="event.preventDefault(); window.open('https://github.com/hriday59/Hydroponic-Automation', '_blank');">Code Base</span>
+            </div>
+            <div class="project-name">AUTOMATED HYDROPONIC FODDER CONTROL</div>
+            <div class="project-desc">Precision microclimate tracking for vertical tier agriculture utilizing pH loops and automated irrigation routines[cite: 60].</div>
+            <div class="project-stack"><span class="stack-tag">ESP32</span><span class="stack-tag">pH Sensing</span><span class="stack-tag">DHT22</span></div>
+          </div>
+        </a>
+
+        <a href="projects/incook.html" class="project-link-wrapper" data-cat="research">
+          <div class="project-card">
+            <div class="project-meta-header">
+              <div class="project-type">Renewable Power // Startup MVP [cite: 57]</div>
+              <span class="repo-link-action" onclick="event.preventDefault(); window.open('https://github.com/hriday59/inCook-System', '_blank');">Code Base</span>
+            </div>
+            <div class="project-name">inCOOK AI-INTEGRATED SMART COOKER</div>
+            <div class="project-desc">Full hardware implementation tracking solar charging and application state management optimization[cite: 58].</div>
+            <div class="project-stack"><span class="stack-tag">AI/IoT Logic</span><span class="stack-tag">Solar App Link</span><span class="stack-tag">Li-Ion Array</span></div>
+          </div>
+        </a>
+
+        <a href="projects/ota-device.html" class="project-link-wrapper" data-cat="iot">
+          <div class="project-card">
+            <div class="project-meta-header">
+              <div class="project-type">Firmware Updates // Failsafe Deployment [cite: 61]</div>
+              <span class="repo-link-action" onclick="event.preventDefault(); window.open('https://github.com/hriday59/ESP32-OTA-Failsafe', '_blank');">Code Base</span>
+            </div>
+            <div class="project-name">ESP32 OTA SECURE IoT FRAMEWORK</div>
+            <div class="project-desc">Automated server pull automation loops featuring partition error fallbacks and validation telemetry pushes[cite: 62].</div>
+            <div class="project-stack"><span class="stack-tag">ESP32 Core</span><span class="stack-tag">OTA Routine</span><span class="stack-tag">NTP Sync</span></div>
+          </div>
+        </a>
+
+        <a href="projects/signature-attendance.html" class="project-link-wrapper" data-cat="research">
+          <div class="project-card">
+            <div class="project-meta-header">
+              <div class="project-type">Biometrics // Authentication Node [cite: 56]</div>
+              <span class="repo-link-action" onclick="event.preventDefault(); window.open('https://github.com/hriday59/Biometric-Auth', '_blank');">Code Base</span>
+            </div>
+            <div class="project-name">SIGNATURE AUTOMATED ATTENDANCE HUB</div>
+            <div class="project-desc">Multi-modal validation framework routing logging events over standard secure cloud infrastructure configurations[cite: 56].</div>
+            <div class="project-stack"><span class="stack-tag">RFID</span><span class="stack-tag">Fingerprint Logic</span><span class="stack-tag">NFC Control</span></div>
+          </div>
+        </a>
+
+        <a href="projects/integrated-iot.html" class="project-link-wrapper" data-cat="iot">
+          <div class="project-card">
+            <div class="project-meta-header">
+              <div class="project-type">Full Stack Edge System // Storage [cite: 56]</div>
+              <span class="repo-link-action" onclick="event.preventDefault(); window.open('https://github.com/hriday59/ESP32-Fullstack-Edge', '_blank');">Code Base</span>
+            </div>
+            <div class="project-name">ESP32 INTEGRATED LOGGING CONTROLLER</div>
+            <div class="project-desc">Simultaneous hardware operational pipeline tracking containing SD local arrays and real-time network configurations[cite: 56].</div>
+            <div class="project-stack"><span class="stack-tag">SD Card Array</span><span class="stack-tag">RTC Module</span><span class="stack-tag">HTTP Client</span></div>
+          </div>
+        </a>
+
+        <a href="projects/nrf24-transceiver.html" class="project-link-wrapper" data-cat="robotics">
+          <div class="project-card">
+            <div class="project-meta-header">
+              <div class="project-type">RF Transceivers // Low-Level Core [cite: 43, 44]</div>
+              <span class="repo-link-action" onclick="event.preventDefault(); window.open('https://github.com/hriday59/NRF24L01-LowLevel', '_blank');">Code Base</span>
+            </div>
+            <div class="project-name">NRF24L01 TRANSCIEVER TELEMETRY BUS</div>
+            <div class="project-desc">Low-overhead, non-blocking pipeline utilizing buffer optimizations for custom industrial network setups[cite: 43, 44].</div>
+            <div class="project-stack"><span class="stack-tag">NRF24L01 RF</span><span class="stack-tag">Arduino Framework</span><span class="stack-tag">Buffer Loops</span></div>
           </div>
         </a>
 
@@ -524,15 +695,45 @@
     </div>
   </section>
 
-  <!-- ═══════════ CONTACT MODULE ═══════════ -->
+  <section id="education">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">05 // Academic Core</div>
+        <h2 class="section-title">ACADEMIC BACKGROUND</h2>
+      </div>
+      <div class="edu-timeline">
+        <div class="edu-item">
+          <div class="edu-period">2019 – 2023 [cite: 29]</div>
+          <div class="edu-degree">BSc in Computer Science & Engineering [cite: 25]</div>
+          <div class="edu-inst">University of Asia Pacific, Green Road, Dhaka, Bangladesh [cite: 25, 29]</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-period">2017 [cite: 31]</div>
+          <div class="edu-degree">Higher Secondary Certificate (HSC) [cite: 26]</div>
+          <div class="edu-inst">Ramganj Model Degree College, Ramganj, Bangladesh [cite: 26]</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="contact">
     <div class="container">
       <div class="section-header">
-        <div class="section-label">05 // Telemetry Link</div>
+        <div class="section-label">06 // Telemetry Link</div>
         <h2 class="section-title">CONNECT INTERFACE</h2>
       </div>
       <div class="contact-grid">
-        <div><h3>LET'S WORK.</h3></div>
+        <div class="contact-info">
+          <h3>LET'S BUILD SOMETHING REAL.</h3>
+          <div class="contact-items">
+            <div class="contact-item"><span class="contact-item-label">EMAIL</span><span class="contact-item-val">hridaysarkar83@gmail.com</span></div>
+            <div class="contact-item"><span class="contact-item-label">PHONE</span><span class="contact-item-val">+880 1626929884</span></div>
+          </div>
+          <div class="social-row">
+            <a href="https://linkedin.com/in/hriday-sarkar" class="social-btn">LinkedIn</a>
+            <a href="https://github.com/hriday59" class="social-btn">GitHub</a>
+          </div>
+        </div>
         <div class="contact-form">
           <input type="text" placeholder="NODE IDENTITY / NAME" required>
           <input type="email" placeholder="ROUTING ADDRESS / EMAIL" required>
@@ -548,7 +749,6 @@
     <div>© 2026 Hriday Sarkar. Verified Production State.</div>
   </footer>
 
-  <!-- ═══════════ SYSTEM FUNCTION DRIVERS ═══════════ -->
   <script>
     const lines = ['Embedded Systems Architect', 'IoT Firmware Engineer', 'Robotics Researcher'];
     let li = 0, ci = 0, deleting = false;
