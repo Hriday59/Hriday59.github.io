@@ -3,1195 +3,588 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hriday Sarkar | IoT Engineer & Robotics Researcher</title>
-  <meta name="description" content="Hriday Sarkar is an IoT Engineer, Embedded Systems Developer, and Robotics Researcher based in Dhaka, Bangladesh.">
+  <title>Hriday Sarkar — IoT Engineer & Robotics Researcher</title>
+  <meta name="description" content="Hriday Sarkar — IoT Engineer, Embedded Systems Developer, and Robotics Researcher based in Dhaka, Bangladesh. ESP32, AI/IoT, Robotics, and Embedded Systems specialist.">
   <meta name="keywords" content="Hriday Sarkar, IoT Engineer, Robotics Researcher, Embedded Systems, ESP32, Bangladesh, NRF24L01, Arduino">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+
   <style>
+    /* ═══════════════════════════════════════
+       DESIGN TOKENS - HIGH-TECH INTERFACE EXECUTIONS
+    ═══════════════════════════════════════ */
     :root {
-      --bg: #f6f8fb;
-      --surface: #ffffff;
-      --surface-soft: #eef3f7;
-      --ink: #16202a;
-      --text: #46515c;
-      --muted: #6d7a86;
-      --line: #dbe3ea;
-      --primary: #176b87;
-      --primary-dark: #0e4b62;
-      --accent: #f59e0b;
-      --success: #168a55;
-      --shadow: 0 18px 50px rgba(20, 32, 42, 0.09);
-      --radius: 8px;
-      --sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      --bg:          #060814;
+      --bg-panel:    #0B0F19;
+      --bg-surface:  #111827;
+      --accent-teal: #0EA5E9;
+      --accent-glow: rgba(14, 165, 233, 0.15);
+      --green:       #10B981;
+      --green-glow:  rgba(16, 185, 129, 0.2);
+      --red:         #EF4444;
+      --text-main:   #F8FAFC;
+      --text-body:   #94A3B8;
+      --text-muted:  #475569;
+      --border-line: rgba(14, 165, 233, 0.15);
+      --border-dim:  rgba(255, 255, 255, 0.05);
+      --sans:        'Inter', sans-serif;
+      --mono:        'JetBrains Mono', monospace;
     }
 
-    *, *::before, *::after { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html { scroll-behavior: smooth; }
 
     body {
-      margin: 0;
       background: var(--bg);
-      color: var(--text);
+      background-image: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15), var(--bg) 60%);
+      color: var(--text-body);
       font-family: var(--sans);
-      line-height: 1.65;
+      overflow-x: hidden;
+      line-height: 1.6;
     }
 
-    img { max-width: 100%; display: block; }
+    /* ═══════════════════════════════════════
+       SCROLLBAR
+    ═══════════════════════════════════════ */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent-teal); border-radius: 3px; }
 
-    a { color: inherit; }
-
-    .skip-link {
-      position: absolute;
-      left: 1rem;
-      top: -4rem;
-      z-index: 999;
-      background: var(--ink);
-      color: #fff;
-      padding: 0.7rem 1rem;
-      border-radius: var(--radius);
-      transition: top 0.2s;
-    }
-
-    .skip-link:focus { top: 1rem; }
-
-    .container {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
+    /* ═══════════════════════════════════════
+       NAVIGATION LAYOUT
+    ═══════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
       z-index: 100;
-      background: rgba(255, 255, 255, 0.9);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(16px);
-    }
-
-    .nav {
-      height: 72px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
+      padding: 0 4rem;
+      height: 64px;
+      background: rgba(6, 8, 20, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-line);
     }
 
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      color: var(--ink);
-      font-weight: 800;
-      text-decoration: none;
-      letter-spacing: -0.02em;
-    }
-
-    .brand-mark {
-      display: grid;
-      width: 42px;
-      height: 42px;
-      place-items: center;
-      border-radius: var(--radius);
-      background: var(--primary);
-      color: #fff;
+    .nav-logo {
       font-family: var(--mono);
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--accent-teal); }
+
+    .nav-right-container {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
     }
 
     .nav-links {
       display: flex;
-      align-items: center;
-      gap: 1.25rem;
+      gap: 2rem;
       list-style: none;
-      margin: 0;
-      padding: 0;
     }
 
     .nav-links a {
-      color: var(--muted);
-      font-size: 0.92rem;
-      font-weight: 600;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-body);
       text-decoration: none;
       transition: color 0.2s;
     }
 
-    .nav-links a:hover,
-    .nav-links a.active { color: var(--primary); }
+    .nav-links a:hover { color: var(--accent-teal); }
 
-    .nav-action {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 40px;
-      padding: 0.65rem 1rem;
-      border-radius: var(--radius);
-      background: var(--primary);
-      color: #fff;
-      font-size: 0.9rem;
-      font-weight: 700;
+    .nav-cv-btn {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--bg);
+      background: var(--accent-teal);
       text-decoration: none;
-      transition: background 0.2s, transform 0.2s;
+      padding: 8px 16px;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px var(--accent-glow);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .nav-action:hover {
-      background: var(--primary-dark);
+    .nav-cv-btn:hover {
       transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
     }
 
-    .menu-toggle {
-      display: none;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      color: var(--ink);
-      font: 600 0.9rem var(--sans);
-      padding: 0.55rem 0.8rem;
-      cursor: pointer;
-    }
-
-    .hero {
-      padding: 6rem 0 4.5rem;
-      background:
-        linear-gradient(135deg, rgba(23, 107, 135, 0.10), transparent 40%),
-        linear-gradient(180deg, #fff, var(--bg));
-      border-bottom: 1px solid var(--line);
-    }
-
-    .hero-grid {
+    /* ═══════════════════════════════════════
+       HERO CONTROL INTERFACE
+    ═══════════════════════════════════════ */
+    #hero {
+      min-height: 100vh;
       display: grid;
-      grid-template-columns: minmax(0, 1.12fr) minmax(300px, 0.88fr);
-      gap: 3rem;
-      align-items: center;
+      grid-template-columns: 1.2fr 1fr;
+      padding-top: 64px;
+      position: relative;
     }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin: 0 0 1rem;
-      color: var(--primary);
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--success);
-      box-shadow: 0 0 0 5px rgba(22, 138, 85, 0.12);
-    }
-
-    h1, h2, h3, p { margin-top: 0; }
-
-    h1 {
-      max-width: 780px;
-      margin-bottom: 1.25rem;
-      color: var(--ink);
-      font-size: clamp(2.7rem, 7vw, 5.3rem);
-      line-height: 0.98;
-      letter-spacing: -0.07em;
-    }
-
-    .hero-lead {
-      max-width: 700px;
-      margin-bottom: 2rem;
-      color: var(--text);
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
-    }
-
-    .hero-actions,
-    .card-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      align-items: center;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 46px;
-      padding: 0.78rem 1.1rem;
-      border: 1px solid transparent;
-      border-radius: var(--radius);
-      font-weight: 750;
-      text-decoration: none;
-      transition: transform 0.2s, border-color 0.2s, background 0.2s;
-    }
-
-    .button.primary {
-      background: var(--primary);
-      color: #fff;
-    }
-
-    .button.primary:hover {
-      background: var(--primary-dark);
-      transform: translateY(-1px);
-    }
-
-    .button.secondary {
-      background: #fff;
-      border-color: var(--line);
-      color: var(--ink);
-    }
-
-    .button.secondary:hover {
-      border-color: var(--primary);
-      transform: translateY(-1px);
-    }
-
-    .hero-panel {
-      overflow: hidden;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .profile-photo {
-      aspect-ratio: 4 / 3;
-      background: linear-gradient(135deg, #dce8ef, #f8fafc);
-      object-fit: cover;
-      width: 100%;
-    }
-
-    .profile-fallback {
-      display: grid;
-      aspect-ratio: 4 / 3;
-      place-items: center;
-      background: linear-gradient(135deg, #dce8ef, #f8fafc);
-      color: var(--primary-dark);
-      font-size: 4rem;
-      font-weight: 800;
-      letter-spacing: -0.08em;
-    }
-
-    .profile-body {
-      padding: 1.4rem;
-    }
-
-    .profile-body h2 {
-      margin-bottom: 0.35rem;
-      color: var(--ink);
-      font-size: 1.25rem;
-      letter-spacing: -0.03em;
-    }
-
-    .profile-body p {
-      margin-bottom: 1rem;
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
-
-    .availability {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.75rem;
-    }
-
-    .mini-stat {
-      padding: 0.85rem;
-      border-radius: var(--radius);
-      background: var(--surface-soft);
-    }
-
-    .mini-stat strong {
-      display: block;
-      color: var(--ink);
-      font-size: 1.2rem;
-      line-height: 1.2;
-    }
-
-    .mini-stat span {
-      color: var(--muted);
-      font-size: 0.78rem;
-      font-weight: 600;
-    }
-
-    section { padding: 5rem 0; }
-
-    .section-heading {
-      display: grid;
-      grid-template-columns: minmax(0, 0.75fr) minmax(260px, 0.55fr);
-      gap: 2rem;
-      align-items: end;
-      margin-bottom: 2.2rem;
-    }
-
-    .section-kicker {
-      margin-bottom: 0.6rem;
-      color: var(--primary);
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .section-heading h2 {
-      margin-bottom: 0;
-      color: var(--ink);
-      font-size: clamp(2rem, 5vw, 3rem);
-      line-height: 1.05;
-      letter-spacing: -0.05em;
-    }
-
-    .section-heading p {
-      margin-bottom: 0;
-      color: var(--muted);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 320px;
-      gap: 1.2rem;
-      align-items: start;
-    }
-
-    .card,
-    .info-card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: 0 10px 30px rgba(20, 32, 42, 0.04);
-    }
-
-    .card { padding: 1.5rem; }
-
-    .about-copy p {
-      margin-bottom: 1rem;
-      font-size: 1rem;
-    }
-
-    .about-copy strong { color: var(--ink); }
-
-    .quick-facts {
-      display: grid;
-      gap: 0.75rem;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .quick-facts li {
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .quick-facts li:last-child {
-      padding-bottom: 0;
-      border-bottom: 0;
-    }
-
-    .quick-facts span {
-      display: block;
-      color: var(--muted);
-      font-family: var(--mono);
-      font-size: 0.74rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .quick-facts strong {
-      display: block;
-      margin-top: 0.1rem;
-      color: var(--ink);
-      font-size: 0.95rem;
-      line-height: 1.45;
-    }
-
-    .skills-grid,
-    .project-grid,
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .skill-card h3,
-    .project-card h3,
-    .service-card h3 {
-      margin-bottom: 0.55rem;
-      color: var(--ink);
-      font-size: 1.05rem;
-      line-height: 1.3;
-    }
-
-    .skill-card p,
-    .project-card p,
-    .service-card p {
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-      margin-top: 1rem;
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      padding: 0.25rem 0.55rem;
-      border-radius: 999px;
-      background: #edf4f6;
-      color: var(--primary-dark);
-      font-family: var(--mono);
-      font-size: 0.74rem;
-      font-weight: 600;
-    }
-
-    .timeline {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 210px minmax(0, 1fr);
-      gap: 1.5rem;
-      padding: 1.4rem;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-    }
-
-    .timeline-date {
-      color: var(--primary);
-      font-family: var(--mono);
-      font-size: 0.82rem;
-      font-weight: 600;
-    }
-
-    .timeline-item h3 {
-      margin-bottom: 0.25rem;
-      color: var(--ink);
-      font-size: 1.1rem;
-      line-height: 1.35;
-    }
-
-    .timeline-company {
-      margin-bottom: 0.8rem;
-      color: var(--muted);
-      font-weight: 700;
-    }
-
-    .clean-list {
-      margin: 0;
-      padding-left: 1.1rem;
-      color: var(--text);
-    }
-
-    .clean-list li + li { margin-top: 0.45rem; }
-
-    .project-tools {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-bottom: 1.4rem;
-    }
-
-    .filter-btn {
-      min-height: 38px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      color: var(--muted);
-      padding: 0.45rem 0.8rem;
-      font: 700 0.85rem var(--sans);
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
-    }
-
-    .filter-btn:hover,
-    .filter-btn.active {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: #fff;
-    }
-
-    .project-card {
+    .hero-left {
       display: flex;
       flex-direction: column;
-      min-height: 100%;
+      justify-content: center;
+      padding: 4rem 4rem 4rem 6rem;
+      z-index: 2;
     }
 
-    .project-card.featured {
-      grid-column: span 2;
-      background: linear-gradient(135deg, #ffffff, #eef7f9);
-    }
-
-    .project-type {
-      margin-bottom: 0.7rem;
-      color: var(--primary);
+    .hero-eyebrow {
       font-family: var(--mono);
-      font-size: 0.76rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--accent-teal);
+      margin-bottom: 1rem;
     }
 
-    .project-card.is-hidden {
-      display: none;
-    }
-
-    .education-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .contact {
-      background: #10212b;
-      color: #dbe8ee;
-    }
-
-    .contact .section-kicker { color: #7dd3fc; }
-    .contact .section-heading h2 { color: #fff; }
-    .contact .section-heading p { color: #b4c2cb; }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
-      gap: 1.2rem;
-      align-items: start;
-    }
-
-    .contact-card {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: var(--radius);
-      padding: 1.4rem;
-    }
-
-    .contact-list {
-      display: grid;
-      gap: 1rem;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .contact-list span {
-      display: block;
-      color: #9fb4c0;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .contact-list a,
-    .contact-list strong {
-      color: #fff;
+    .hero-name {
+      font-size: clamp(3rem, 5vw, 4.5rem);
       font-weight: 700;
-      text-decoration: none;
-      overflow-wrap: anywhere;
+      line-height: 1.1;
+      color: var(--text-main);
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
     }
 
-    .social-row {
+    .hero-name .accent {
+      color: transparent;
+      background: linear-gradient(135deg, var(--text-main), var(--accent-teal));
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .hero-title-line {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--text-body);
+      margin-bottom: 2rem;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 6px; height: 14px;
+      background: var(--accent-teal);
+      margin-left: 4px;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    .hero-desc {
+      font-size: 16px;
+      color: var(--text-body);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-top: 1.2rem;
+      gap: 1rem;
     }
 
-    .social-row a {
-      padding: 0.5rem 0.7rem;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: var(--radius);
-      color: #dbe8ee;
-      font-weight: 700;
+    .btn-primary {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--bg);
+      background: var(--accent-teal);
+      padding: 12px 28px;
+      border-radius: 4px;
       text-decoration: none;
+      transition: background 0.2s;
     }
 
-    .contact-form {
-      display: grid;
-      gap: 0.85rem;
+    .btn-primary:hover { background: var(--text-main); }
+
+    .btn-outline {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-teal);
+      border: 1px solid var(--border-line);
+      padding: 12px 28px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.2s;
     }
 
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.85rem;
+    .btn-outline:hover { background: var(--accent-glow); }
+
+    .hero-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-right: 6rem;
     }
 
-    label {
-      display: grid;
-      gap: 0.35rem;
-      color: #c8d8df;
-      font-size: 0.86rem;
-      font-weight: 700;
-    }
-
-    input,
-    textarea {
+    .terminal {
       width: 100%;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: var(--radius);
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
-      font: 500 0.96rem var(--sans);
-      padding: 0.85rem 0.9rem;
-      outline: none;
-      resize: vertical;
+      max-width: 520px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-line);
+      border-radius: 8px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     }
 
-    input:focus,
-    textarea:focus {
-      border-color: #7dd3fc;
-      box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.18);
-    }
-
-    .form-note {
-      margin: 0;
-      color: #9fb4c0;
-      font-size: 0.88rem;
-    }
-
-    .form-submit {
-      min-height: 48px;
-      border: 0;
-      border-radius: var(--radius);
-      background: var(--accent);
-      color: #1d1607;
-      font: 800 0.98rem var(--sans);
-      cursor: pointer;
-      transition: transform 0.2s, background 0.2s;
-    }
-
-    .form-submit:hover {
-      background: #fbbf24;
-      transform: translateY(-1px);
-    }
-
-    footer {
-      padding: 1.4rem 0;
-      background: #0b171e;
-      color: #9fb4c0;
-      font-size: 0.9rem;
-    }
-
-    .footer-inner {
+    .terminal-bar {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-line);
+      padding: 12px;
+      border-radius: 8px 8px 0 0;
       display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
+      gap: 8px;
     }
 
-    @media (max-width: 920px) {
-      .hero-grid,
-      .section-heading,
-      .about-grid,
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
+    .t-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .t-dot.r { background: #EF4444; }
+    .t-dot.y { background: #F59E0B; }
+    .t-dot.g { background: #10B981; }
 
-      .hero { padding-top: 4.5rem; }
+    .terminal-body { padding: 1.5rem; font-family: var(--mono); font-size: 13px; line-height: 1.8; }
+    .t-key { color: var(--accent-teal); }
+    .t-str { color: var(--green); }
 
-      .skills-grid,
-      .project-grid,
-      .services-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2rem; max-width: 540px; }
+    .badge { font-family: var(--mono); font-size: 10px; padding: 4px 10px; background: var(--bg-panel); border: 1px solid var(--border-dim); border-radius: 4px; color: var(--text-body); }
 
-      .project-card.featured { grid-column: span 1; }
+    /* ═══════════════════════════════════════
+       SECTION GLOBAL METRICS
+    ═══════════════════════════════════════ */
+    section { padding: 8rem 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 4rem; }
+    .section-header { margin-bottom: 4rem; }
+    .section-label { font-family: var(--mono); font-size: 11px; color: var(--accent-teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+    .section-title { font-size: 2.5rem; font-weight: 700; color: var(--text-main); letter-spacing: -0.02em; }
 
-      .timeline-item { grid-template-columns: 1fr; }
-    }
+    /* ═══════════════════════════════════════
+       ABOUT LAYER
+    ═══════════════════════════════════════ */
+    #about { background: var(--bg-panel); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; }
+    
+    /* Squircle Frame Transformation */
+    .about-photo-wrap { position: relative; border-radius: 24px; overflow: hidden; border: 2px solid var(--border-line); box-shadow: 0 0 30px var(--accent-glow); }
+    .about-photo-wrap img { width: 100%; display: block; object-fit: cover; }
+    .about-content p { color: var(--text-body); margin-bottom: 1.5rem; font-size: 16px; }
 
-    @media (max-width: 720px) {
-      .nav {
-        height: auto;
-        min-height: 68px;
-        flex-wrap: wrap;
-        padding: 0.75rem 0;
-      }
+    /* ═══════════════════════════════════════
+       SKILLS MATRIX
+    ═══════════════════════════════════════ */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+    .skill-cell { background: var(--bg-panel); padding: 2rem; border-radius: 8px; border: 1px solid var(--border-dim); transition: border-color 0.2s; }
+    .skill-cell:hover { border-color: var(--border-line); }
+    .skill-name { font-weight: 600; color: var(--text-main); margin-bottom: 1rem; }
+    .skill-bar-wrap { height: 4px; background: var(--bg-surface); border-radius: 2px; margin-bottom: 1rem; }
+    .skill-bar { height: 100%; background: var(--accent-teal); border-radius: 2px; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-tag { font-family: var(--mono); font-size: 10px; background: var(--bg-surface); padding: 2px 8px; border-radius: 4px; }
 
-      .menu-toggle { display: inline-flex; }
+    /* ═══════════════════════════════════════
+       EXPERIENCE MODULE
+    ═══════════════════════════════════════ */
+    #experience { background: var(--bg-panel); }
+    .exp-grid { display: grid; grid-template-columns: 250px 1fr; gap: 4rem; }
+    .exp-tab { display: block; width: 100%; text-align: left; background: none; border: none; border-left: 2px solid var(--border-dim); padding: 12px 20px; color: var(--text-body); font-family: var(--mono); font-size: 13px; cursor: pointer; }
+    .exp-tab.active { color: var(--accent-teal); border-left-color: var(--accent-teal); background: var(--accent-glow); }
+    .exp-panel { display: none; }
+    .exp-panel.active { display: block; }
+    .exp-role { font-size: 1.8rem; font-weight: 700; color: var(--text-main); }
+    .exp-company { color: var(--accent-teal); font-family: var(--mono); margin-bottom: 1rem; }
+    .exp-list { list-style: none; margin-top: 1.5rem; }
+    .exp-list li { margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative; }
+    .exp-list li::before { content: "→"; position: absolute; left: 0; color: var(--accent-teal); }
 
-      .nav-links {
-        display: none;
-        width: 100%;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        padding: 0.75rem 0 0.25rem;
-      }
+    /* ═══════════════════════════════════════
+       INTERACTIVE PROJECTS INTERFACE
+    ═══════════════════════════════════════ */
+    .projects-filter { display: flex; gap: 1rem; margin-bottom: 3rem; }
+    .filter-btn { background: var(--bg-panel); border: 1px solid var(--border-dim); color: var(--text-body); padding: 8px 16px; border-radius: 4px; font-family: var(--mono); font-size: 12px; cursor: pointer; }
+    .filter-btn.active { background: var(--accent-teal); color: var(--bg); border-color: var(--accent-teal); }
+    
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2rem; }
+    
+    /* Interactive Hyperlinked Cards Layout */
+    .project-link-wrapper { text-decoration: none; color: inherit; display: block; }
+    .project-card { background: var(--bg-panel); border: 1px solid var(--border-dim); border-radius: 8px; padding: 2rem; height: 100%; transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; }
+    .project-link-wrapper:hover .project-card { transform: translateY(-4px); border-color: var(--border-line); box-shadow: 0 10px 30px var(--accent-glow); }
+    
+    .project-meta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .project-type { font-family: var(--mono); font-size: 11px; color: var(--accent-teal); }
+    
+    /* Architecture Action Blocks */
+    .repo-link-action { font-family: var(--mono); font-size: 11px; color: var(--text-main); background: var(--bg-surface); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border-dim); transition: background 0.2s; }
+    .repo-link-action:hover { background: var(--accent-teal); color: var(--bg); }
+    
+    .project-name { font-size: 1.5rem; font-weight: 700; color: var(--text-main); margin-bottom: 1rem; }
+    .project-desc { font-size: 14px; color: var(--text-body); margin-bottom: 1.5rem; flex-grow: 1; }
 
-      .nav-links.open { display: flex; }
+    /* ═══════════════════════════════════════
+       CONTACT LAYER
+    ═══════════════════════════════════════ */
+    #contact { background: var(--bg-panel); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .contact-form input, .contact-form textarea { width: 100%; background: var(--bg-surface); border: 1px solid var(--border-dim); border-radius: 4px; padding: 1rem; color: var(--text-main); font-family: var(--mono); margin-bottom: 1rem; outline: none; }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent-teal); }
+    .form-submit { background: var(--accent-teal); color: var(--bg); border: none; padding: 1rem 2rem; font-family: var(--mono); font-weight: 600; border-radius: 4px; cursor: pointer; width: 100%; }
 
-      .nav-links a {
-        display: block;
-        padding: 0.8rem 0;
-        border-top: 1px solid var(--line);
-      }
+    footer { padding: 3rem 4rem; background: var(--bg); border-top: 1px solid var(--border-dim); display: flex; justify-content: space-between; font-family: var(--mono); font-size: 12px; }
 
-      .nav-action { display: none; }
-
-      .skills-grid,
-      .project-grid,
-      .services-grid,
-      .education-grid,
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-
-      section { padding: 4rem 0; }
-
-      h1 { letter-spacing: -0.055em; }
+    /* RESPONSIVE PIPELINES */
+    @media (max-width: 960px) {
+      #hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .hero-left { padding: 4rem 2rem; }
+      .about-grid, .exp-grid, .contact-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 2rem; }
     }
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header">
-    <div class="container nav">
-      <a href="#top" class="brand" aria-label="Hriday Sarkar home">
-        <span class="brand-mark">HS</span>
-        <span>Hriday Sarkar</span>
-      </a>
-      <button class="menu-toggle" type="button" aria-controls="navLinks" aria-expanded="false">Menu</button>
-      <ul class="nav-links" id="navLinks">
+  <!-- ═══════════ NAV INTERFACE ═══════════ -->
+  <nav>
+    <a href="#hero" class="nav-logo">hs<span>://</span>portfolio</a>
+    <div class="nav-right-container">
+      <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#services">Services</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <a class="nav-action" href="mailto:hridaysarkar83@gmail.com">Email Me</a>
+      <!-- Production Level Document Action Linked -->
+      <a href="assets/Hriday_Sarkar_CV.pdf" download="Hriday_Sarkar_CV.pdf" class="nav-cv-btn">Download CV</a>
     </div>
-  </header>
+  </nav>
 
-  <main id="main">
-    <section class="hero" id="top">
-      <div class="container hero-grid">
-        <div>
-          <p class="eyebrow">Available for engineering and research work</p>
-          <h1>IoT Engineer and Robotics Researcher from Dhaka.</h1>
-          <p class="hero-lead">
-            I build practical embedded systems, connected devices, and robotics prototypes using ESP32, Arduino, wireless communication, sensors, and automation logic.
+  <!-- ═══════════ HERO INTERFACE ═══════════ -->
+  <section id="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">SYSTEM ACTIVE // HARDWARE ARCHITECT</div>
+      <h1 class="hero-name">HRIDAY<br><span class="accent">SARKAR</span></h1>
+      <div class="hero-title-line">
+        <span id="typed"></span><span class="cursor"></span>
+      </div>
+      <p class="hero-desc">
+        Building intelligent embedded platforms at the raw intersection of firmware processing models, hardware networks, and low-latency cloud interaction architecture.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn-primary">View Matrix</a>
+        <a href="assets/Hriday_Sarkar_CV.pdf" download="Hriday_Sarkar_CV.pdf" class="btn-outline">Get Resume Spec</a>
+      </div>
+      <div class="hero-badges">
+        <span class="badge">ESP32 Core</span><span class="badge">FreeRTOS Logic</span><span class="badge">MQTT Bus</span><span class="badge">C++ Architecture</span>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="terminal">
+        <div class="terminal-bar"><div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div></div>
+        <div class="terminal-body">
+          <div><span class="t-key">"identity"</span>: <span class="t-str">"Hriday Sarkar"</span>,</div>
+          <div><span class="t-key">"engineering_discipline"</span>: <span class="t-str">"Embedded Firmware / IoT"</span>,</div>
+          <div><span class="t-key">"node"</span>: <span class="t-str">"Dhaka, Bangladesh"</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ABOUT INTERFACE ═══════════ -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">01 // Identity File</div>
+        <h2 class="section-title">WHO I AM</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-photo-wrap">
+          <img src="assets/img/DP.jpg" alt="Hriday Sarkar Platform Frame">
+        </div>
+        <div class="about-content">
+          <p>
+            I am an Embedded Systems Engineer and IoT Systems Researcher. My core engineering practices reside within the bare-metal and firmware abstractions: programming microcontrollers, refining register execution routines, and structuring multi-layer telemetry communication networks.
           </p>
-          <div class="hero-actions">
-            <a class="button primary" href="#projects">View Selected Projects</a>
-            <a class="button secondary" href="#contact">Start a Conversation</a>
-          </div>
+          <p>
+            Currently running active engineering strategies as Business Development Team Lead at eChithi, anchoring the Phoenix Project alongside public curriculum development tracks for robotics processing paradigms.
+          </p>
         </div>
-
-        <aside class="hero-panel" aria-label="Profile summary">
-          <img class="profile-photo" src="assets/img/DP.jpg" alt="Portrait of Hriday Sarkar" onerror="this.replaceWith(Object.assign(document.createElement('div'), {className:'profile-fallback', textContent:'HS'}))">
-          <div class="profile-body">
-            <h2>Hriday Sarkar</h2>
-            <p>Embedded systems developer, robotics researcher, and Business Development Team Lead at echithi.com.</p>
-            <div class="availability">
-              <div class="mini-stat">
-                <strong>3+ yrs</strong>
-                <span>Professional work</span>
-              </div>
-              <div class="mini-stat">
-                <strong>Dhaka</strong>
-                <span>Bangladesh</span>
-              </div>
-              <div class="mini-stat">
-                <strong>ESP32</strong>
-                <span>Core platform</span>
-              </div>
-              <div class="mini-stat">
-                <strong>RM22</strong>
-                <span>Research robot</span>
-              </div>
-            </div>
-          </div>
-        </aside>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="about">
-      <div class="container">
-        <div class="section-heading">
-          <div>
-            <p class="section-kicker">About</p>
-            <h2>Hardware, software, and real-world problem solving.</h2>
-          </div>
-          <p>I focus on systems that sense, compute, communicate, and act reliably outside the lab.</p>
+  <!-- ═══════════ SKILLS MODULE ═══════════ -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">02 // Capability Arrays</div>
+        <h2 class="section-title">TECH MATRIX</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-cell">
+          <div class="skill-name">Embedded Systems Firmware</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" style="width:92%"></div></div>
+          <div class="skill-tags"><span class="skill-tag">ESP32 Core</span><span class="skill-tag">Bare-Metal C++</span><span class="skill-tag">FreeRTOS Tasks</span></div>
         </div>
+        <div class="skill-cell">
+          <div class="skill-name">Communication Interfaces</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div>
+          <div class="skill-tags"><span class="skill-tag">MQTT Bus</span><span class="skill-tag">SPI / I2C Logic</span><span class="skill-tag">NRF24L01 RF</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="about-grid">
-          <article class="card about-copy">
-            <p>
-              I am an <strong>IoT Engineer and Robotics Researcher</strong> based in Kaliganj, Dhaka, Bangladesh. I studied Computer Science & Engineering at the University of Asia Pacific and work across firmware, sensors, wireless communication, and robotics control.
-            </p>
-            <p>
-              At <strong>echithi.com</strong>, I lead business development for a robotics-centric e-commerce company and support technical initiatives including the Phoenix Project and the Born To Code program for school students.
-            </p>
-            <p>
-              My research work includes the <strong>RM22 IoT Robot</strong>, a multi-domain robotics platform for gas detection, firefighting, surveillance, and gesture control. I am preparing this work for publication in IEEE, MDPI, or Springer venues.
-            </p>
-          </article>
-
-          <aside class="card" aria-label="Quick facts">
-            <ul class="quick-facts">
-              <li><span>Location</span><strong>Kaliganj, Dhaka, Bangladesh</strong></li>
-              <li><span>Education</span><strong>BSc in Computer Science & Engineering</strong></li>
-              <li><span>Email</span><strong>hridaysarkar83@gmail.com</strong></li>
-              <li><span>Phone</span><strong>+880 1626929884</strong></li>
-              <li><span>Research</span><strong>IEEE / MDPI / Springer target</strong></li>
+  <!-- ═══════════ EXPERIENCE INTERFACE ═══════════ -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">03 // Documented Timeline</div>
+        <h2 class="section-title">WORK EXPERIENCE</h2>
+      </div>
+      <div class="exp-grid">
+        <div class="exp-nav">
+          <button class="exp-tab active" onclick="showExp('e1', this)">eChithi // Lead Engineer</button>
+        </div>
+        <div class="exp-panels">
+          <div class="exp-panel active" id="e1">
+            <div class="exp-role">Business Development Team Lead</div>
+            <div class="exp-company">eChithi Technology Ecosystem</div>
+            <ul class="exp-list">
+              <li>Directing project workflows for cross-functional engineering and operational units executing national robotics pipeline rollouts.</li>
             </ul>
-          </aside>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="skills">
-      <div class="container">
-        <div class="section-heading">
-          <div>
-            <p class="section-kicker">Skills</p>
-            <h2>Technical strengths that are easy to understand.</h2>
-          </div>
-          <p>Grouped by practical outcomes instead of a long tool list.</p>
-        </div>
-
-        <div class="skills-grid">
-          <article class="card skill-card">
-            <h3>Embedded Firmware</h3>
-            <p>Microcontroller programming, device logic, EEPROM storage, OTA updates, interrupts, and real-time behavior.</p>
-            <div class="tag-row"><span class="tag">ESP32</span><span class="tag">Arduino</span><span class="tag">C/C++</span><span class="tag">EEPROM</span></div>
-          </article>
-          <article class="card skill-card">
-            <h3>IoT Connectivity</h3>
-            <p>Wi-Fi setup, AP fallback, server communication, NTP sync, HTTP upload, and web-based device configuration.</p>
-            <div class="tag-row"><span class="tag">Wi-Fi</span><span class="tag">HTTP</span><span class="tag">NTP</span><span class="tag">Web UI</span></div>
-          </article>
-          <article class="card skill-card">
-            <h3>Wireless Systems</h3>
-            <p>Low-power radio communication and reliable TX/RX behavior for robotics and embedded projects.</p>
-            <div class="tag-row"><span class="tag">NRF24L01</span><span class="tag">RF24</span><span class="tag">250KBPS</span></div>
-          </article>
-          <article class="card skill-card">
-            <h3>Robotics</h3>
-            <p>Autonomous movement, gesture control, navigation logic, sensor fusion, and safety-oriented robot behavior.</p>
-            <div class="tag-row"><span class="tag">A*</span><span class="tag">Sensors</span><span class="tag">Control</span><span class="tag">Navigation</span></div>
-          </article>
-          <article class="card skill-card">
-            <h3>AgriTech Automation</h3>
-            <p>Sensor-driven farming systems for hydroponics, environment monitoring, irrigation, and data logging.</p>
-            <div class="tag-row"><span class="tag">DHT22</span><span class="tag">pH</span><span class="tag">SD Logging</span></div>
-          </article>
-          <article class="card skill-card">
-            <h3>Research and Training</h3>
-            <p>Academic writing, robotics curriculum design, team documentation, and beginner-friendly technical training.</p>
-            <div class="tag-row"><span class="tag">IEEE</span><span class="tag">MDPI</span><span class="tag">BTC</span></div>
-          </article>
-        </div>
+  <!-- ═══════════ INTERACTIVE PRODUCTION REGISTRY ═══════════ -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">04 // Hardware Subsystems Portfolio</div>
+        <h2 class="section-title">BUILT WORK</h2>
       </div>
-    </section>
 
-    <section id="experience">
-      <div class="container">
-        <div class="section-heading">
-          <div>
-            <p class="section-kicker">Experience</p>
-            <h2>Professional work with clear responsibilities.</h2>
-          </div>
-          <p>From data operations to technical program leadership.</p>
-        </div>
+      <div class="projects-filter">
+        <button class="filter-btn active" data-filter="all">All Cores</button>
+        <button class="filter-btn" data-filter="iot">IoT Nodes</button>
+        <button class="filter-btn" data-filter="robotics">Robotics</button>
+      </div>
 
-        <div class="timeline">
-          <article class="timeline-item">
-            <div class="timeline-date">Mar 2024 - Present</div>
-            <div>
-              <h3>Business Development Team Lead</h3>
-              <p class="timeline-company">echithi.com</p>
-              <ul class="clean-list">
-                <li>Lead business development operations for a robotics-focused e-commerce company.</li>
-                <li>Direct the Phoenix Project, connecting embedded systems, IoT, AI, and robotics education.</li>
-                <li>Run the Born To Code program for hands-on robotics and embedded systems learning.</li>
-                <li>Prepare research work based on the RM22 robot project.</li>
-              </ul>
+      <div class="projects-grid" id="projectsGrid">
+
+        <!-- PROJECT CORE FRAME: RM22 INTERACTIVE ASSET LINK -->
+        <a href="projects/rm22.html" class="project-link-wrapper" data-cat="robotics">
+          <div class="project-card">
+            <div class="project-meta-header">
+              <div class="project-type">Robotics Core // Sensor Fusion</div>
+              <!-- Code Repository Action Access Node -->
+              <span class="repo-link-action" onclick="event.preventDefault(); window.open('https://github.com/hriday59/RM22-Core', '_blank');">Code Base</span>
             </div>
-          </article>
-          <article class="timeline-item">
-            <div class="timeline-date">May 2023 - Feb 2024</div>
-            <div>
-              <h3>Information Analysis & Data Entry Executive</h3>
-              <p class="timeline-company">echithi.com</p>
-              <ul class="clean-list">
-                <li>Managed product information pipelines and e-commerce listings.</li>
-                <li>Standardized product images and improved data quality processes.</li>
-                <li>Supported database structuring and workflow improvements.</li>
-              </ul>
+            <div class="project-name">RM22 MULTI-DOMAIN INDUSTRIAL ROBOT</div>
+            <div class="project-desc">Autonomous chemical hazard tracking and structural navigation platform utilizing real-time sensor fusion loops. Click to view architecture diagrams, hardware initialization drivers, and operational video feeds.</div>
+            <div class="project-stack">
+              <span class="stack-tag">C++ Firmware</span><span class="stack-tag">NRF24L01 Network</span><span class="stack-tag">Telemetry Processing</span>
             </div>
-          </article>
-          <article class="timeline-item">
-            <div class="timeline-date">Feb 2023 - Apr 2023</div>
-            <div>
-              <h3>Intern, Information Analysis & Data Entry</h3>
-              <p class="timeline-company">echithi.com</p>
-              <ul class="clean-list">
-                <li>Collected market data and entered product information into server systems.</li>
-                <li>Learned internal standards for product data accuracy and review.</li>
-              </ul>
+          </div>
+        </a>
+
+        <!-- PROJECT CORE FRAME: EEPROM WI-FI MANAGER -->
+        <a href="projects/wifi-manager.html" class="project-link-wrapper" data-cat="iot">
+          <div class="project-card">
+            <div class="project-meta-header">
+              <div class="project-type">EEPROM Persistence // Core Subsystem</div>
+              <span class="repo-link-action" onclick="event.preventDefault(); window.open('https://github.com/hriday59/ESP32-WiFi-EEPROM', '_blank');">Code Base</span>
             </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <div class="container">
-        <div class="section-heading">
-          <div>
-            <p class="section-kicker">Projects</p>
-            <h2>Selected work across IoT, robotics, and research.</h2>
-          </div>
-          <p>Each project explains the problem, the technical approach, and the stack in plain language.</p>
-        </div>
-
-        <div class="project-tools" aria-label="Project filters">
-          <button class="filter-btn active" type="button" data-filter="all">All</button>
-          <button class="filter-btn" type="button" data-filter="iot">IoT</button>
-          <button class="filter-btn" type="button" data-filter="robotics">Robotics</button>
-          <button class="filter-btn" type="button" data-filter="research">Research</button>
-        </div>
-
-        <div class="project-grid">
-          <article class="card project-card featured" data-cat="robotics research">
-            <p class="project-type">Robotics / Research</p>
-            <h3>RM22 IoT Robot</h3>
-            <p>A multi-domain autonomous robot for gas detection, firefighting, surveillance, and gesture control. Built as a research platform using wireless communication, sensors, and embedded decision logic.</p>
-            <div class="tag-row"><span class="tag">C++</span><span class="tag">Arduino</span><span class="tag">NRF24L01</span><span class="tag">Sensors</span></div>
-          </article>
-          <article class="card project-card" data-cat="iot">
-            <p class="project-type">IoT / ESP32</p>
-            <h3>EEPROM Wi-Fi Manager</h3>
-            <p>Persistent Wi-Fi credential management for ESP32 with auto-connect, AP mode, NeoPixel indicators, and web-based configuration.</p>
-            <div class="tag-row"><span class="tag">ESP32</span><span class="tag">EEPROM</span><span class="tag">Web UI</span></div>
-          </article>
-          <article class="card project-card" data-cat="robotics">
-            <p class="project-type">Robotics / Navigation</p>
-            <h3>A* Warehouse Navigator</h3>
-            <p>Autonomous robot navigation on a 13x13 grid using A* pathfinding, obstacle handling, and dynamic terrain cost calculation.</p>
-            <div class="tag-row"><span class="tag">A*</span><span class="tag">C++</span><span class="tag">Navigation</span></div>
-          </article>
-          <article class="card project-card" data-cat="iot">
-            <p class="project-type">AgriTech / Automation</p>
-            <h3>Hydroponic Fodder System</h3>
-            <p>ESP32-based vertical farming system with pH monitoring, DHT22 environment sensing, and automated irrigation control.</p>
-            <div class="tag-row"><span class="tag">ESP32</span><span class="tag">DHT22</span><span class="tag">pH</span></div>
-          </article>
-          <article class="card project-card" data-cat="research iot">
-            <p class="project-type">Research / Renewable Energy</p>
-            <h3>inCOOK AI+IoT Cooker</h3>
-            <p>Research-stage portable cooker concept with AI/IoT integration, app control, solar support, and Li-Ion power.</p>
-            <div class="tag-row"><span class="tag">AI/IoT</span><span class="tag">Solar</span><span class="tag">App Control</span></div>
-          </article>
-          <article class="card project-card" data-cat="iot">
-            <p class="project-type">IoT / Device Template</p>
-            <h3>ESP32 OTA IoT Device</h3>
-            <p>Reusable ESP32 IoT template with AP fallback, NTP sync, scheduled server upload, NeoPixel status, and OTA updates.</p>
-            <div class="tag-row"><span class="tag">OTA</span><span class="tag">NTP</span><span class="tag">HTTP</span></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="education">
-      <div class="container">
-        <div class="section-heading">
-          <div>
-            <p class="section-kicker">Education</p>
-            <h2>Academic background.</h2>
-          </div>
-          <p>Formal study in computer science with hands-on engineering practice.</p>
-        </div>
-
-        <div class="education-grid">
-          <article class="card">
-            <p class="project-type">2019 - 2023</p>
-            <h3>BSc in Computer Science & Engineering</h3>
-            <p>University of Asia Pacific, Green Road, Dhaka-1215, Bangladesh</p>
-          </article>
-          <article class="card">
-            <p class="project-type">2016 - 2017</p>
-            <h3>Higher Secondary Certificate</h3>
-            <p>Ramganj Model Degree College, Ramganj, Lakshmipur-3720, Bangladesh</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="services">
-      <div class="container">
-        <div class="section-heading">
-          <div>
-            <p class="section-kicker">Services</p>
-            <h2>Ways I can help.</h2>
-          </div>
-          <p>Focused support for prototypes, research, and technical education.</p>
-        </div>
-
-        <div class="services-grid">
-          <article class="card service-card">
-            <h3>Embedded Systems Development</h3>
-            <p>Firmware and hardware-software integration for ESP32, Arduino, sensors, EEPROM storage, status LEDs, and OTA updates.</p>
-          </article>
-          <article class="card service-card">
-            <h3>IoT System Architecture</h3>
-            <p>Device-to-server solutions including Wi-Fi setup, web configuration, NTP sync, HTTP pipelines, and AP fallback.</p>
-          </article>
-          <article class="card service-card">
-            <h3>Robotics Engineering</h3>
-            <p>Robot control, sensor integration, wireless communication, autonomous navigation, gesture control, and safety logic.</p>
-          </article>
-          <article class="card service-card">
-            <h3>AgriTech Automation</h3>
-            <p>Hydroponic systems, pH and temperature monitoring, environment-aware irrigation, and farming automation.</p>
-          </article>
-          <article class="card service-card">
-            <h3>Research Consulting</h3>
-            <p>Support for AI/IoT concepts, technical documentation, academic writing, and publication preparation.</p>
-          </article>
-          <article class="card service-card">
-            <h3>Technical Training</h3>
-            <p>Beginner-friendly embedded systems and robotics learning programs for students and early-stage engineers.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="contact" id="contact">
-      <div class="container">
-        <div class="section-heading">
-          <div>
-            <p class="section-kicker">Contact</p>
-            <h2>Let's discuss your project or collaboration.</h2>
-          </div>
-          <p>Send a short message with the project type, timeline, and the kind of support you need.</p>
-        </div>
-
-        <div class="contact-grid">
-          <aside class="contact-card">
-            <ul class="contact-list">
-              <li><span>Email</span><a href="mailto:hridaysarkar83@gmail.com">hridaysarkar83@gmail.com</a></li>
-              <li><span>Phone</span><a href="tel:+8801626929884">+880 1626929884</a></li>
-              <li><span>Location</span><strong>Kaliganj, Dhaka, Bangladesh</strong></li>
-            </ul>
-            <div class="social-row" aria-label="Social profiles">
-              <a href="https://linkedin.com/in/hriday-sarkar/">LinkedIn</a>
-              <a href="https://github.com/">GitHub</a>
-              <a href="https://twitter.com/HridaySarkar0">Twitter</a>
-              <a href="https://facebook.com/hriday083">Facebook</a>
+            <div class="project-name">ESP32 EEPROM WI-FI CREDENTIAL CONTROLLER</div>
+            <div class="project-desc">Persistent cryptographic network allocation framework for production IoT nodes featuring automated fallback access-point configurations. Click to review execution traces.</div>
+            <div class="project-stack">
+              <span class="stack-tag">ESP32 Logic</span><span class="stack-tag">Non-Volatile Storage</span><span class="stack-tag">Web Control UI</span>
             </div>
-          </aside>
+          </div>
+        </a>
 
-          <form class="contact-card contact-form" id="contactForm">
-            <div class="form-row">
-              <label>Name
-                <input name="name" type="text" autocomplete="name" required>
-              </label>
-              <label>Email
-                <input name="email" type="email" autocomplete="email" required>
-              </label>
-            </div>
-            <label>Subject
-              <input name="subject" type="text" required>
-            </label>
-            <label>Message
-              <textarea name="message" rows="6" required></textarea>
-            </label>
-            <button class="form-submit" type="submit">Send Message</button>
-            <p class="form-note" id="formNote">This opens your email app with the message prepared.</p>
-          </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CONTACT MODULE ═══════════ -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">05 // Telemetry Link</div>
+        <h2 class="section-title">CONNECT INTERFACE</h2>
+      </div>
+      <div class="contact-grid">
+        <div><h3>LET'S WORK.</h3></div>
+        <div class="contact-form">
+          <input type="text" placeholder="NODE IDENTITY / NAME" required>
+          <input type="email" placeholder="ROUTING ADDRESS / EMAIL" required>
+          <textarea rows="5" placeholder="SPECIFICATION BLOCK / MESSAGE" required></textarea>
+          <button class="form-submit" type="submit">TRANSMIT PACKET</button>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
   <footer>
-    <div class="container footer-inner">
-      <span>(c) <span id="year"></span> Hriday Sarkar. All rights reserved.</span>
-      <span>IoT Engineer | Robotics Researcher | Embedded Systems Developer</span>
-    </div>
+    <div>hs://portfolio</div>
+    <div>© 2026 Hriday Sarkar. Verified Production State.</div>
   </footer>
 
+  <!-- ═══════════ SYSTEM FUNCTION DRIVERS ═══════════ -->
   <script>
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('#navLinks');
+    const lines = ['Embedded Systems Architect', 'IoT Firmware Engineer', 'Robotics Researcher'];
+    let li = 0, ci = 0, deleting = false;
+    const el = document.getElementById('typed');
 
-    menuToggle.addEventListener('click', () => {
-      const isOpen = navLinks.classList.toggle('open');
-      menuToggle.setAttribute('aria-expanded', String(isOpen));
-    });
-
-    navLinks.addEventListener('click', (event) => {
-      if (event.target.matches('a')) {
-        navLinks.classList.remove('open');
-        menuToggle.setAttribute('aria-expanded', 'false');
+    function type() {
+      const line = lines[li];
+      if (!deleting) {
+        el.textContent = line.slice(0, ++ci);
+        if (ci === line.length) { deleting = true; setTimeout(type, 2000); return; }
+      } else {
+        el.textContent = line.slice(0, --ci);
+        if (ci === 0) { deleting = false; li = (li + 1) % lines.length; }
       }
-    });
+      setTimeout(type, deleting ? 30 : 60);
+    }
+    type();
 
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
+    function showExp(id, btn) {
+      document.querySelectorAll('.exp-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.exp-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+    }
 
-    filterButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        filterButtons.forEach((item) => item.classList.remove('active'));
-        button.classList.add('active');
-
-        const filter = button.dataset.filter;
-        projectCards.forEach((card) => {
-          const categories = card.dataset.cat.split(' ');
-          card.classList.toggle('is-hidden', filter !== 'all' && !categories.includes(filter));
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.project-link-wrapper').forEach(wrapper => {
+          const show = filter === 'all' || wrapper.dataset.cat === filter;
+          wrapper.style.display = show ? 'block' : 'none';
         });
       });
     });
-
-    const sections = document.querySelectorAll('main section[id]');
-    const links = document.querySelectorAll('.nav-links a');
-
-    const navObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        links.forEach((link) => {
-          link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
-        });
-      });
-    }, { rootMargin: '-35% 0px -55% 0px' });
-
-    sections.forEach((section) => navObserver.observe(section));
-
-    document.querySelector('#contactForm').addEventListener('submit', (event) => {
-      event.preventDefault();
-      const form = new FormData(event.currentTarget);
-      const name = form.get('name').trim();
-      const email = form.get('email').trim();
-      const subject = form.get('subject').trim();
-      const message = form.get('message').trim();
-      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-      window.location.href = `mailto:hridaysarkar83@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-      document.querySelector('#formNote').textContent = 'Your email app should open now. You can review and send the message there.';
-    });
-
-    document.querySelector('#year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
