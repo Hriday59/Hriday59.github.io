@@ -717,6 +717,25 @@
       border-color: var(--accent);
       color: var(--accent);
     }
+    .modal-images {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 1.5rem 0;
+}
+
+.modal-images img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  object-fit: cover;
+  box-shadow: var(--glow);
+  transition: transform 0.3s;
+}
+
+.modal-images img:hover {
+  transform: scale(1.02);
+}
 
     /* ── EXPERIENCE & EDUCATION ── */
     .timeline {
@@ -1390,6 +1409,7 @@
     <h2 class="modal-title" id="modalTitle"></h2>
     <div class="modal-badges" id="modalBadges"></div>
     <div class="modal-body" id="modalBody"></div>
+    <div class="modal-images" id="modalImages"></div>
     <div class="modal-features" id="modalFeatures"></div>
     <div class="modal-links" id="modalLinks"></div>
   </div>
@@ -1573,6 +1593,15 @@
     document.getElementById('modalTitle').textContent = p.name;
     document.getElementById('modalBadges').innerHTML = p.tags.map(t => `<span class="modal-badge">${t}</span>`).join('');
     document.getElementById('modalBody').textContent = p.overview;
+    const imagesDiv = document.getElementById('modalImages');
+
+if (p.images && p.images.length > 0) {
+  imagesDiv.innerHTML = p.images.map(img => `
+    <img src="${img}" alt="project image">
+  `).join('');
+} else {
+  imagesDiv.innerHTML = '';
+}
 
     let featuresHTML = `<h4>Key Features</h4><ul>${p.features.map(f => `<li>${f}</li>`).join('')}</ul>`;
     if (p.research) {
